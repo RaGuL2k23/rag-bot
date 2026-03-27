@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+python-dotenv
+groq
+chromadb
+sentence-transformers
+sqlalchemy
+psycopg2-binary
+redis
+pymupdf
+pytesseract
+pillow
+ddgs
+langchain-groq
+langchain-community

@@ -1,0 +1,36 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+venv/
+ENV/
+env/
+
+# Environment and Secrets
+.env
+.flaskenv
+*.secret
+
+# Database & Persistent Data
+# (Prevent local DB data from being baked into the image)
+chroma_db/
+postgres_data/
+*.db
+*.sqlite3
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# IDEs and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
