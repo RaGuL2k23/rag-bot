@@ -11,7 +11,7 @@ from history import get_history_redis, save_history_redis , clear_redis_history 
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect ,UploadFile, File
 from ingest import ingest_pdf
 from fastapi.middleware.cors import CORSMiddleware
-from ollama import chat as ollama_chat
+# from ollama import chat as ollama_chat
  
 load_dotenv()
 
