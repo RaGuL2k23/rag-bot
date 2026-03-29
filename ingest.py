@@ -1,4 +1,4 @@
-# Run this ONCE to load your PDF into ChromaDB
+import hashlib
 
 import fitz  # PyMuPDF
 import chromadb
@@ -9,9 +9,9 @@ embedder = SentenceTransformer("all-MiniLM-L6-v2")
 
 # Connect to ChromaDB (creates a local folder called "chroma_db")
 chroma_client = chromadb.PersistentClient(path="./chroma_db")
-collection = chroma_client.get_or_create_collection("documents")
 
-def ingest_pdf(pdf_path: str):
+def ingest_pdf(pdf_path: str , session_id: str): 
+    collection = chroma_client.get_or_create_collection(f"docs_{session_id}")
     # Step 1: extract text from PDF
     doc = fitz.open(pdf_path)
     full_text = ""
@@ -28,10 +28,12 @@ def ingest_pdf(pdf_path: str):
         i += chunk_size - overlap
 
     # Step 3: convert chunks to vectors and store in ChromaDB
-    for idx, chunk in enumerate(chunks):
+    for   chunk in (chunks):
         embedding = embedder.encode(chunk).tolist()
+        # unique ID = hash of the chunk content itself
+        chunk_id = hashlib.md5(chunk.encode()).hexdigest()
         collection.add(
-            ids=[f"chunk_{idx}"],
+            ids=[chunk_id],
             embeddings=[embedding],
             documents=[chunk]
         )
@@ -39,5 +41,3 @@ def ingest_pdf(pdf_path: str):
     print("total in DB:", collection.count())
 
 
-if __name__ == "__main__":
-    ingest_pdf("10TH MARKSHEET.pdf")  # <-- change to your PDF path
