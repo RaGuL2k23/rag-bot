@@ -58,6 +58,7 @@ convert to vectors → store in ChromaDB
 ## API Endpoints
 | Method | Endpoint | Description |
 |--------|----------|-------------|
+| POST | `/ingest/{session_id}` | Upload and ingest a PDF for a session |
 | POST | `/rag-chat` | Send a message, get AI response | 
 | GET | `/history/{session_id}` | Get full chat history  (function exist api should be done)
 | DELETE | `/clear-history/{session_id}` | Clear session history |
